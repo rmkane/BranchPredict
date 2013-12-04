@@ -8,7 +8,7 @@ import com.rmkane.BranchPredict.predictor.TwoLevelPredictor;
 
 public class App {
 
-	private static final int START_BIT = 7, END_BIT = 15;
+	private static final int START_BIT = 5, END_BIT = 25;
 	
 	private static int currIndex = 1;
 	private static String traceFileName = "branch-trace-gcc.trace.gz";
@@ -18,7 +18,7 @@ public class App {
 		output = new String[4];
 
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("Predictor,");
+		buffer.append("BHT Size,");
 
 		for (int b = START_BIT; b < END_BIT; b++)
 			buffer.append(String.format("%s,",
@@ -33,7 +33,6 @@ public class App {
 		run(new BimodalBranchPredictor(traceFileName, START_BIT, END_BIT), "Bimodal Branch Predictor");
 		run(new GShareBranchPredictor(traceFileName, START_BIT, END_BIT), "GShare Branch Predictor");
 		run(new TwoLevelPredictor(traceFileName, START_BIT, END_BIT), "Two-Level Branch Predictor");
-		
 		printResults();
 	}
 	
@@ -78,6 +77,14 @@ Misprediction            : 6211595 / 16416279 or %37.84
 ------------------------------------------------------------
 Bimodal Branch Predictor
 ------------------------
+Branch History Table Size: 32B
+Correct Prediction       : 11543027 / 16416279 or %70.31
+Misprediction            : 4873252 / 16416279 or %29.69
+------------------------------------------------------------
+Branch History Table Size: 64B
+Correct Prediction       : 11881980 / 16416279 or %72.38
+Misprediction            : 4534299 / 16416279 or %27.62
+------------------------------------------------------------
 Branch History Table Size: 128B
 Correct Prediction       : 12318670 / 16416279 or %75.04
 Misprediction            : 4097609 / 16416279 or %24.96
@@ -110,10 +117,58 @@ Branch History Table Size: 16K
 Correct Prediction       : 14562263 / 16416279 or %88.71
 Misprediction            : 1854016 / 16416279 or %11.29
 ------------------------------------------------------------
+Branch History Table Size: 32K
+Correct Prediction       : 14576368 / 16416279 or %88.79
+Misprediction            : 1839911 / 16416279 or %11.21
+------------------------------------------------------------
+Branch History Table Size: 64K
+Correct Prediction       : 14588954 / 16416279 or %88.87
+Misprediction            : 1827325 / 16416279 or %11.13
+------------------------------------------------------------
+Branch History Table Size: 128K
+Correct Prediction       : 14591334 / 16416279 or %88.88
+Misprediction            : 1824945 / 16416279 or %11.12
+------------------------------------------------------------
+Branch History Table Size: 256K
+Correct Prediction       : 14602207 / 16416279 or %88.95
+Misprediction            : 1814072 / 16416279 or %11.05
+------------------------------------------------------------
+Branch History Table Size: 512K
+Correct Prediction       : 14602141 / 16416279 or %88.95
+Misprediction            : 1814138 / 16416279 or %11.05
+------------------------------------------------------------
+Branch History Table Size: 1M
+Correct Prediction       : 14602465 / 16416279 or %88.95
+Misprediction            : 1813814 / 16416279 or %11.05
+------------------------------------------------------------
+Branch History Table Size: 2M
+Correct Prediction       : 14602464 / 16416279 or %88.95
+Misprediction            : 1813815 / 16416279 or %11.05
+------------------------------------------------------------
+Branch History Table Size: 4M
+Correct Prediction       : 14602464 / 16416279 or %88.95
+Misprediction            : 1813815 / 16416279 or %11.05
+------------------------------------------------------------
+Branch History Table Size: 8M
+Correct Prediction       : 14602464 / 16416279 or %88.95
+Misprediction            : 1813815 / 16416279 or %11.05
+------------------------------------------------------------
+Branch History Table Size: 16M
+Correct Prediction       : 14602464 / 16416279 or %88.95
+Misprediction            : 1813815 / 16416279 or %11.05
+------------------------------------------------------------
 
 ------------------------------------------------------------
 GShare Branch Predictor
 -----------------------
+Branch History Table Size: 32B
+Correct Prediction       : 11291270 / 16416279 or %68.78
+Misprediction            : 5125009 / 16416279 or %31.22
+------------------------------------------------------------
+Branch History Table Size: 64B
+Correct Prediction       : 11600748 / 16416279 or %70.67
+Misprediction            : 4815531 / 16416279 or %29.33
+------------------------------------------------------------
 Branch History Table Size: 128B
 Correct Prediction       : 12041659 / 16416279 or %73.35
 Misprediction            : 4374620 / 16416279 or %26.65
@@ -146,10 +201,58 @@ Branch History Table Size: 16K
 Correct Prediction       : 14649273 / 16416279 or %89.24
 Misprediction            : 1767006 / 16416279 or %10.76
 ------------------------------------------------------------
+Branch History Table Size: 32K
+Correct Prediction       : 14683319 / 16416279 or %89.44
+Misprediction            : 1732960 / 16416279 or %10.56
+------------------------------------------------------------
+Branch History Table Size: 64K
+Correct Prediction       : 14697200 / 16416279 or %89.53
+Misprediction            : 1719079 / 16416279 or %10.47
+------------------------------------------------------------
+Branch History Table Size: 128K
+Correct Prediction       : 14699765 / 16416279 or %89.54
+Misprediction            : 1716514 / 16416279 or %10.46
+------------------------------------------------------------
+Branch History Table Size: 256K
+Correct Prediction       : 14711671 / 16416279 or %89.62
+Misprediction            : 1704608 / 16416279 or %10.38
+------------------------------------------------------------
+Branch History Table Size: 512K
+Correct Prediction       : 14711945 / 16416279 or %89.62
+Misprediction            : 1704334 / 16416279 or %10.38
+------------------------------------------------------------
+Branch History Table Size: 1M
+Correct Prediction       : 14712537 / 16416279 or %89.62
+Misprediction            : 1703742 / 16416279 or %10.38
+------------------------------------------------------------
+Branch History Table Size: 2M
+Correct Prediction       : 14712600 / 16416279 or %89.62
+Misprediction            : 1703679 / 16416279 or %10.38
+------------------------------------------------------------
+Branch History Table Size: 4M
+Correct Prediction       : 14712600 / 16416279 or %89.62
+Misprediction            : 1703679 / 16416279 or %10.38
+------------------------------------------------------------
+Branch History Table Size: 8M
+Correct Prediction       : 14712600 / 16416279 or %89.62
+Misprediction            : 1703679 / 16416279 or %10.38
+------------------------------------------------------------
+Branch History Table Size: 16M
+Correct Prediction       : 14712600 / 16416279 or %89.62
+Misprediction            : 1703679 / 16416279 or %10.38
+------------------------------------------------------------
 
 ------------------------------------------------------------
 Two-Level Branch Predictor
 --------------------------
+Branch History Table Size: 32B
+Correct Prediction       : 11547966 / 16416279 or %70.34
+Misprediction            : 4868313 / 16416279 or %29.66
+------------------------------------------------------------
+Branch History Table Size: 64B
+Correct Prediction       : 12005448 / 16416279 or %73.13
+Misprediction            : 4410831 / 16416279 or %26.87
+------------------------------------------------------------
 Branch History Table Size: 128B
 Correct Prediction       : 12662558 / 16416279 or %77.13
 Misprediction            : 3753721 / 16416279 or %22.87
@@ -182,14 +285,53 @@ Branch History Table Size: 16K
 Correct Prediction       : 14818214 / 16416279 or %90.27
 Misprediction            : 1598065 / 16416279 or %9.73
 ------------------------------------------------------------
+Branch History Table Size: 32K
+Correct Prediction       : 14829249 / 16416279 or %90.33
+Misprediction            : 1587030 / 16416279 or %9.67
+------------------------------------------------------------
+Branch History Table Size: 64K
+Correct Prediction       : 14835022 / 16416279 or %90.37
+Misprediction            : 1581257 / 16416279 or %9.63
+------------------------------------------------------------
+Branch History Table Size: 128K
+Correct Prediction       : 14836011 / 16416279 or %90.37
+Misprediction            : 1580268 / 16416279 or %9.63
+------------------------------------------------------------
+Branch History Table Size: 256K
+Correct Prediction       : 14838240 / 16416279 or %90.39
+Misprediction            : 1578039 / 16416279 or %9.61
+------------------------------------------------------------
+Branch History Table Size: 512K
+Correct Prediction       : 14838216 / 16416279 or %90.39
+Misprediction            : 1578063 / 16416279 or %9.61
+------------------------------------------------------------
+Branch History Table Size: 1M
+Correct Prediction       : 14838496 / 16416279 or %90.39
+Misprediction            : 1577783 / 16416279 or %9.61
+------------------------------------------------------------
+Branch History Table Size: 2M
+Correct Prediction       : 14838498 / 16416279 or %90.39
+Misprediction            : 1577781 / 16416279 or %9.61
+------------------------------------------------------------
+Branch History Table Size: 4M
+Correct Prediction       : 14838498 / 16416279 or %90.39
+Misprediction            : 1577781 / 16416279 or %9.61
+------------------------------------------------------------
+Branch History Table Size: 8M
+Correct Prediction       : 14838498 / 16416279 or %90.39
+Misprediction            : 1577781 / 16416279 or %9.61
+------------------------------------------------------------
+Branch History Table Size: 16M
+Correct Prediction       : 14838498 / 16416279 or %90.39
+Misprediction            : 1577781 / 16416279 or %9.61
+------------------------------------------------------------
 
 ------------------------------------------------------------
 RESULTS:
 ------------------------------------------------------------
-Predictor,128B,256B,512B,1K,2K,4K,8K,16K,
-Bimodal,75.04,77.87,81.05,84.05,86.12,87.52,88.15,88.71,
-GShare,73.35,76.26,79.93,83.64,85.95,87.77,88.72,89.24,
-TwoLevel,77.13,80.92,84.78,87.33,88.86,89.74,90.04,90.27,
-
+BHT Size,32B,64B,128B,256B,512B,1K,2K,4K,8K,16K,32K,64K,128K,256K,512K,1M,2M,4M,8M,16M,
+Bimodal,70.31,72.38,75.04,77.87,81.05,84.05,86.12,87.52,88.15,88.71,88.79,88.87,88.88,88.95,88.95,88.95,88.95,88.95,88.95,88.95,
+GShare,68.78,70.67,73.35,76.26,79.93,83.64,85.95,87.77,88.72,89.24,89.44,89.53,89.54,89.62,89.62,89.62,89.62,89.62,89.62,89.62,
+TwoLevel,70.34,73.13,77.13,80.92,84.78,87.33,88.86,89.74,90.04,90.27,90.33,90.37,90.37,90.39,90.39,90.39,90.39,90.39,90.39,90.39,
 
 */
